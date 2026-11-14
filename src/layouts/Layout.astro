@@ -1,0 +1,94 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Exan Moncher: cybersecurity, IT audit, and compliance." } = Astro.props;
+const fullTitle = title === "Home" ? "Exan Moncher" : `${title} | Exan Moncher`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Exan Moncher</a>
+      <nav aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Exan Moncher</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1f2b;
+    --muted: #4a5568;
+    --accent: #0b5cad;
+    --rule: #d9dee6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f141b;
+      --text: #e8ecf2;
+      --muted: #a7b1c0;
+      --accent: #6db3ff;
+      --rule: #2a3340;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 44rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+  }
+
+  a { color: var(--accent); }
+
+  h1 { font-size: 2.25rem; line-height: 1.2; margin: 2.5rem 0 0.5rem; }
+  h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
+
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .site-header nav a { margin-left: 1.25rem; text-decoration: none; }
+  .site-header nav a:hover { text-decoration: underline; }
+  .brand { font-weight: 700; color: var(--text); text-decoration: none; }
+
+  .lead { font-size: 1.2rem; color: var(--muted); margin-top: 0; }
+
+  .site-footer {
+    margin-top: 4rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
