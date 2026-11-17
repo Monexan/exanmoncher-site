@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Site Security" description="How this site is built, deployed, and secured.">
+  <h1>How this site is secured</h1>
+  <p class="lead">
+    A small static site, built to keep the attack surface small and every
+    control verifiable.
+  </p>
+
+  <h2>Architecture</h2>
+  <p>
+    The site is static HTML and CSS generated with Astro. It has no database,
+    no login, no forms, and no third-party scripts, so there is little to
+    attack and nothing to steal from visitors.
+  </p>
+
+  <h2>Transport and headers</h2>
+  <ul>
+    <li>HTTPS is enforced on every address variant, with HTTP upgraded automatically.</li>
+    <li>HSTS is enabled with a one-month policy, which I plan to extend in stages.</li>
+    <li>A strict Content Security Policy allows only same-origin resources and blocks framing.</li>
+    <li>Permissions-Policy disables camera, microphone, and geolocation.</li>
+    <li>Referrer-Policy and X-Content-Type-Options are set.</li>
+  </ul>
+  <p>
+    Scan result: A+ on securityheaders.com, November 15, 2026. A header scan
+    checks one layer only. It does not test the code, dependencies, or
+    account security.
+  </p>
+
+  <h2>Deployment and access</h2>
+  <ul>
+    <li>Source code is in GitHub and deployed automatically through Cloudflare Pages.</li>
+    <li>Code is pushed over SSH with a passphrase-protected key.</li>
+    <li>Cloudflare's GitHub integration is limited to this one repository.</li>
+    <li>Two-factor authentication is enabled on my GitHub and Cloudflare accounts.</li>
+  </ul>
+
+  <h2>Dependencies</h2>
+  <p>
+    Dependabot alerts and security updates are enabled, and a lockfile pins
+    exact dependency versions.
+  </p>
+
+  <h2>Domains</h2>
+  <p>
+    A second domain I own redirects permanently to this one. Since it never
+    handles email, it publishes a null MX record, an SPF policy that permits
+    no senders, and a DMARC reject policy, which prevents it from being used
+    to spoof mail.
+  </p>
+
+  <h2>What I'm still improving</h2>
+  <ul>
+    <li>Extending the HSTS policy after a trouble-free period.</li>
+    <li>Reviewing dependencies and access on a regular schedule.</li>
+  </ul>
+</Layout>
